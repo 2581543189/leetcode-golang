@@ -20,6 +20,7 @@ func wiggleSort(nums []int)  {
 	for target != mid {
 		ol := left
 		or:= right
+		target = left
 		targetVal := nums[target]
 		for left < right{
 			for left < right && nums[right] >= targetVal {
@@ -42,7 +43,6 @@ func wiggleSort(nums []int)  {
 			right = left - 1
 			left = ol
 		}
-		target = left
 	}
 	fmt.Println(target)
 
@@ -52,20 +52,20 @@ func wiggleSort(nums []int)  {
 		return (2 * i + 1) % (n|1)
 	}
 	mid = nums[target]
-	target = 0
-	left = 0
-	right = n-1
+	eq := 0
+	bigger := 0
+	smaller:= n-1
 
-	for left <= right && target < n{
-		if nums[V(target)] > mid {
-			nums[V(left)],nums[V(target)] = nums[V(target)],nums[V(left)]
-			left++
-			target++
-		}else if nums[V(target)] < mid{
-			nums[V(target)],nums[V(right)] = nums[V(right)],nums[V(target)]
-			right--
+	for eq <= smaller{
+		if nums[V(eq)] > mid {
+			nums[V(eq)],nums[V(bigger)] = nums[V(bigger)],nums[V(eq)]
+			bigger++
+			eq++
+		}else if nums[V(eq)] < mid{
+			nums[V(eq)],nums[V(smaller)] = nums[V(smaller)],nums[V(eq)]
+			smaller--
 		}else{
-			target++
+			eq++
 		}
 	}
 
@@ -73,7 +73,7 @@ func wiggleSort(nums []int)  {
 
 
 func main(){
-	nums:= []int {1,3,2,2,3,1}
+	nums:= []int {1,4,4,4,5,6}
 	wiggleSort(nums)
 	fmt.Println(nums)
 

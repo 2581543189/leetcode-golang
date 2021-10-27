@@ -33,5 +33,6 @@ nums = [1,3,2,2,3,1]
 * 题目数据保证，对于给定的输入 nums ，总能产生满足题目要求的结果
 
 总结：
-* 
+* 寻找第k大数字：https://www.jianshu.com/p/daebe1596ca6?utm_source=oschina-app
+* 虚地址方法
 

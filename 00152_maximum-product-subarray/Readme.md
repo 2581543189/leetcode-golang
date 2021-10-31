@@ -29,3 +29,7 @@
 总结：
 
 * 已经四道动态规划的题目了，状态转移方程首先要考虑一个参数行不行，比如，如果是数组截取的话，考虑以n为start 的数组作为状态n
+* math.MinInt32
+* const INT_MAX = int(^uint(0) >> 1)
+* const INT_MIN = ^INT_MAX
+* Math.max(a,b)

@@ -39,4 +39,11 @@
 
 总结：
 
-* 
+* 图用什么表示？
+```golang
+	//维护单词与索引的映射关系
+	dict:=make(map[string]int)
+	//图
+	graph:=[][]int{}
+```
+* 广度优先遍历 使用queue

@@ -31,4 +31,14 @@
 * 0 <= matrix[i][j] <= 2^31 - 1
 
 总结：
-* 
+* 从小往大了走的场景下，不需要判断是否走过，因为不能反着走
+* 访问某个节点上下左右的方式
+```go
+var dirs = []struct{ x, y int }{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}
+for _, d := range dirs {
+    nx, ny := x+d.x, y+d.y
+    if 0 <= nx && nx < m && 0 <= ny && ny < n && board[nx][ny] != '#' {
+        dfs(node, nx, ny)
+    }
+}
+```

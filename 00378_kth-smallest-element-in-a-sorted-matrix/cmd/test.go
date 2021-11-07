@@ -3,29 +3,38 @@ package main
 import "fmt"
 
 func kthSmallest1(matrix [][]int, k int) int {
-	left,right := matrix[0][0] , matrix[len(matrix) - 1][len(matrix[0]) - 1]
-	x := 0
-	for left < right {
-		x = left + (right - left) / 2
-		// 计算 <= x 的元素数量
-		m,n := len(matrix) - 1,0
-		count := 0
-		for m >= 0 && n < len(matrix[0]) {
-			if matrix[m][n] <= x {
-				count += m + 1
-				n++
+	n:=len(matrix)
+	l,r := matrix[0][0], matrix[n - 1][n - 1]
+	for l < r {
+		mid := l + (r - l) >> 1
+
+		// 统计有多少个元素小于mid
+		x,y:= n-1,0
+		count :=0
+		for x >=0 && y< n{
+
+			// 为什么 == 要 y++?
+			//当前统计的是，小于等于mid 的数字有多少个
+			//如果往上走，右边的数字有可能还是 mid，就被漏掉了
+			// 如果往右走，上边的数字有可能还是 mid，但是没有漏掉
+			if matrix[x][y] <= mid{
+				count += (x + 1)
+				y++
 			}else{
-				m--
+				x--
 			}
 		}
-		if count < k {
-			left = x + 1
+		// 为什么 >= k?
+		// 小于等于mid 的数字有k 个的时候，需要继续在左边计算
+		if count >= k {
+			r = mid
 		}else{
-			right = x
+			l = mid + 1
 		}
 	}
-	return left
+	return l
 }
+
 
 func main()  {
 	matrix := [][] int {{-5,-4},{-5,-4}}

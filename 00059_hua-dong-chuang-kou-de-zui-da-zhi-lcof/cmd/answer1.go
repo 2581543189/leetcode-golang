@@ -36,6 +36,6 @@ func maxSlidingWindow(nums []int, k int) []int {
 	return ans
 }
 func main()  {
-	nums := [] int {}
-	fmt.Println(maxSlidingWindow(nums,0))
+	nums := [] int {1,3,-1,-3,5,3,6,7}
+	fmt.Println(maxSlidingWindow(nums,3))
 }

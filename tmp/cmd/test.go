@@ -1,18 +1,32 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
+	"math/rand"
+	"sync"
 )
 
-func main(){
-	//var s string = "ac"
-	//var t string = "bb"
-	//fmt.Println(isAnagram(s,t))
-	nums := [] int {1,2,3,4,5,6,7}
-	rotate(nums,3)
-	fmt.Println(json.Marshal(nums))
+func main() {
+	ch:= make(chan int)
+	wg := sync.WaitGroup{}
+	wg.Add(2)
+	go func(){
+		defer wg.Done()
+		for i:=0;i<5;i++{
+			ch <- rand.Intn(100)
+		}
+		close(ch)
+	}()
+	go func(){
+		defer wg.Done()
+		for val:=range ch{
+			fmt.Println(val)
+		}
+	}()
+	wg.Wait()
 }
+
+
 
 func rotate(nums []int, k int)  {
 	n:=len(nums)

@@ -2,53 +2,48 @@ package main
 
 import (
 	"fmt"
-	"strings"
-	"sync"
 )
 
 func main (){
-	letter,number := make(chan bool),make(chan bool)
-	wait := sync.WaitGroup{}
+	letter,number,finish := make(chan bool),make(chan bool),make(chan bool)
+
 	go func() {
-		i := 1
-		for {
-			select {
-			case <-number:
-				fmt.Print(i)
-				i++
-				fmt.Print(i)
-				i++
-				letter <- true
-				break
-			default:
-				break
+		i:=0
+		for{
+			_,ok:= <-letter
+			if ok{
+				if i < 26{
+					fmt.Print(string('A'+i))
+					i++
+					fmt.Print(string('A'+i))
+					i++
+					number<-true
+				}else{
+					close(number)
+				}
+			}else{
+				close(finish)
+				return
 			}
 		}
 	}()
-	wait.Add(1)
-	go func(wait *sync.WaitGroup) {
-		str := "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-		i := 0
+
+	go func() {
+		i:=1
 		for{
-			select {
-			case <-letter:
-				if i >= strings.Count(str,"")-1 {
-					wait.Done()
-					return
-				}
-				fmt.Print(str[i:i+1])
+			_,ok:= <-number
+			if ok{
+				fmt.Print(i)
 				i++
-				if i >= strings.Count(str,"") {
-					i=0
-				}
-				fmt.Print(str[i:i+1])
+				fmt.Print(i)
 				i++
-				number <- true
-				break
-			default: break
+				letter<-true
+			}else{
+				close(letter)
+				return
 			}
 		}
-	}(&wait)
+	}()
 	number<-true
-	wait.Wait()
+	<- finish
 }

@@ -53,6 +53,6 @@ root = [1,2]
 * strconv.Itoa(node.Val)
 * strconv.Atoi(str)
 * strings.Join(ret,",")
-* strings.Split(data,",")
+* strings.sSplit(data,",")
 * 
 

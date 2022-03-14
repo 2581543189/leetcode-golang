@@ -36,3 +36,4 @@ nums = [1], k = 1
 * less 方法 的i 和 j 是 heap 数组的下标。如果堆本身存的就是下标，不要搞混了
 * index = 0  是根，默认是小根堆
 * heap.pop 方法，会把根交换到 len - 1,所以pop 需要把 len - 1 返回
+* 使用小根堆，计算最大topk 可以把复杂度从 nlogn 优化为 nlogk

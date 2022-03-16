@@ -37,3 +37,4 @@ mapSum.sum("ap");           // return 5 (apple + app = 3 + 2 = 5)
 
 总结：
 * 每个节点的val 存在map里，sum存在tree里
+* 使用delta 对 trie 节点上的val 进行更新
